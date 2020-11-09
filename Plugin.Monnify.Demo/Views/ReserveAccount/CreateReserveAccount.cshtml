@@ -1,0 +1,16 @@
+﻿@model Plugin.Monnify.ReserveAccountApi.CreateReserveAccountResponse
+
+@{
+    ViewData["Title"] = "CreateReserveAccount";
+}
+
+<table class="table table-responsive">
+    <tr>
+        <th>Account Reference</th>
+        <td>@Model?.ResponseBody?.AccountReference</td>
+    </tr>
+    <tr>
+        <th>Account Number</th>
+        <td>@Model?.ResponseBody?.AccountNumber</td>
+    </tr>
+</table>

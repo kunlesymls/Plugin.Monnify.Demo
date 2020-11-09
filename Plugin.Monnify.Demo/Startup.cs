@@ -1,17 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Plugin.Monnify.Demo.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
+using Plugin.Monnify.Demo.Data;
 
 namespace Plugin.Monnify.Demo
 {
@@ -32,6 +27,13 @@ namespace Plugin.Monnify.Demo
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+            services.AddScoped<IMonnifyClient>(x => new MonnifyClient(Configuration.GetValue<string>("MonnifyUrl:BaseUrl")));
+            //services.AddScoped<IMonnifyClient>(x => new MonnifyClient(Configuration.GetValue<string>("MonnifyUrl:BaseUrl"),
+            //                                    Configuration.GetValue<string>("MonnifyUrl:ApiKey"), Configuration.GetValue<string>("MonnifyUrl:SecretKey")));
+
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
