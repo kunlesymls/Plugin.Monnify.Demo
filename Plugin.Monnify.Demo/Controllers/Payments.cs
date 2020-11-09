@@ -32,7 +32,7 @@ namespace Plugin.Monnify.Demo.Controllers
                 CustomerEmail = "kunlesymls@gmail.com", // my real email... Feel free to contact me
                 CustomerPhoneNumber = "07036927669", // my real phone number... Feel free to contact me
                 PaymentReference = Guid.NewGuid().ToString(),
-                paymentDescription = "Testig one time payment",
+                PaymentDescription = "Testig one time payment",
                 CurrencyCode = "NGN",
                 ContractCode = _monnifyClient.ContractCode,
                 RedirectUrl = "https://localhost:44389/Payments/ConfirmPayment",
