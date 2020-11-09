@@ -32,9 +32,9 @@ namespace Plugin.Monnify.Demo
 
             //services.AddScoped<IMonnifyClient>(x => new MonnifyClient(Configuration.GetValue<string>("MonnifyUrl:BaseUrl")));
             //services.Configure<MonnifySetting>(Configuration.GetSection("MonnifyUrl"));
-            //services.AddScoped<IMonnifyClient>(x => new MonnifyClient(Configuration.GetValue<string>("MonnifyUrl:BaseUrl"),
-            //                                    Configuration.GetValue<string>("MonnifyUrl:ApiKey"), Configuration.GetValue<string>("MonnifyUrl:SecretKey"),
-            //                                    Configuration.GetValue<string>("MonnifyUrl:ContractCode")));
+            //services.AddScoped<IMonnifyClient>(x => new MonnifyClient(baseUrl: Configuration.GetValue<string>("MonnifyUrl:BaseUrl"),
+            //                                    apiKey: Configuration.GetValue<string>("MonnifyUrl:ApiKey"), secretKey: Configuration.GetValue<string>("MonnifyUrl:SecretKey"),
+            //                                    contractCode: Configuration.GetValue<string>("MonnifyUrl:ContractCode")));
 
             services.AddSingleton<IMonnifyClient>(x => new MonnifyClient(
                 new MonnifySetting
