@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 using Plugin.Monnify.Demo.Data;
 
@@ -29,9 +30,20 @@ namespace Plugin.Monnify.Demo
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
-            services.AddScoped<IMonnifyClient>(x => new MonnifyClient(Configuration.GetValue<string>("MonnifyUrl:BaseUrl")));
+            //services.AddScoped<IMonnifyClient>(x => new MonnifyClient(Configuration.GetValue<string>("MonnifyUrl:BaseUrl")));
+            //services.Configure<MonnifySetting>(Configuration.GetSection("MonnifyUrl"));
             //services.AddScoped<IMonnifyClient>(x => new MonnifyClient(Configuration.GetValue<string>("MonnifyUrl:BaseUrl"),
-            //                                    Configuration.GetValue<string>("MonnifyUrl:ApiKey"), Configuration.GetValue<string>("MonnifyUrl:SecretKey")));
+            //                                    Configuration.GetValue<string>("MonnifyUrl:ApiKey"), Configuration.GetValue<string>("MonnifyUrl:SecretKey"),
+            //                                    Configuration.GetValue<string>("MonnifyUrl:ContractCode")));
+
+            services.AddSingleton<IMonnifyClient>(x => new MonnifyClient(
+                new MonnifySetting
+                {
+                    BaseUrl = Configuration.GetValue<string>("MonnifyUrl:BaseUrl"),
+                    ApiKey = Configuration.GetValue<string>("MonnifyUrl:ApiKey"),
+                    SecretKey = Configuration.GetValue<string>("MonnifyUrl:SecretKey"),
+                    ContractCode = Configuration.GetValue<string>("MonnifyUrl:ContractCode")
+                }));
 
 
             services.AddControllersWithViews();

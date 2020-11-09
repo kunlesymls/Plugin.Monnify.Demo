@@ -32,7 +32,7 @@ namespace Plugin.Monnify.Demo.Controllers
                 CustomerName = "Joseph Ajileye",
                 CustomerEmail = "Kunlesymls@gmail.com",
                 AccountReference = $"MNFREF001",
-                ContractCode = monnifyConfig["ContractCode"],
+                ContractCode = _monnifyClient.ContractCode,
             });
             if (response.RequestSuccessful)
             {

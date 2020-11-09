@@ -1,0 +1,41 @@
+﻿@model Plugin.Monnify.InvoiceApi.TransactionStatusResponse
+
+@{
+    ViewData["Title"] = "ConfirmPayment";
+}
+@if (Model != null)
+{
+    @if (Model.ResponseBody.PaymentStatus.ToLower().Equals("paid"))
+    {
+        <h3 class="text-center text-success">Payment Confirmed</h3>
+    }
+    else
+    {
+        <h3 class="text-center text-danger">Payment Pending</h3>
+    }
+
+    <table class="table table-responsive">
+        <tr>
+            <th>Customer Name</th>
+            <td>@Model?.ResponseBody?.CustomerName</td>
+        </tr>
+        <tr>
+            <th>Customer Email</th>
+            <td>@Model?.ResponseBody?.CustomerEmail</td>
+        </tr>
+        <tr>
+            <th>Amount</th>
+            <td>@Model?.ResponseBody?.Amount</td>
+        </tr>
+        <tr>
+            <th>Payment Status</th>
+            <td>@Model?.ResponseBody?.PaymentStatus</td>
+        </tr>
+    </table>
+}
+else
+{
+    <h3 class="text-center text-success">No Record to display</h3>
+}
+
+

@@ -1,0 +1,9 @@
+﻿@model Plugin.Monnify.InvoiceApi.OneTimeTransactionResponse
+
+@{
+    ViewData["Title"] = "OneTimePayment";
+}
+
+<h1>OneTimePayment</h1>
+<a href="@Model.ResponseBody.CheckoutUrl" class="btn btn-primary">Pay Now</a>
+
