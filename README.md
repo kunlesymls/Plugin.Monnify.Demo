@@ -10,7 +10,7 @@ This nuget package abstract all the api you need for easy and successful integra
 
 Dowload and install the nuget pakage
 
-Install-Package Plugin.Monnify -Version 1.0.3
+Install-Package Plugin.Monnify -Version 1.0.4
 Always check out for the latest version 
 
 Clone or Fork the repository 
