@@ -35,7 +35,8 @@ namespace Plugin.Monnify.Demo.Controllers
                 PaymentDescription = "Testig one time payment",
                 CurrencyCode = "NGN",
                 ContractCode = _monnifyClient.ContractCode,
-                RedirectUrl = "https://localhost:44389/Payments/ConfirmPayment",
+                //RedirectUrl = "https://localhost:44389/Payments/ConfirmPayment",
+                RedirectUrl = Url.Action("ConfirmPayment", "Payments"),
                 IncomeSplitConfig = new List<Incomesplitconfig>()
             });
             return View(oneTimePaymentApiResponse);
