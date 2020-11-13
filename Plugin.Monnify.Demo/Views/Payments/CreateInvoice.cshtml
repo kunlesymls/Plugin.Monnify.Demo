@@ -1,0 +1,46 @@
+﻿@model Plugin.Monnify.InvoiceApi.InvoiceResponse
+
+@{
+    ViewData["Title"] = "OneTimePayment";
+}
+
+<h1>OneTimePayment</h1>
+<a href="@Model.ResponseBody.CheckoutUrl" class="btn btn-primary">Pay Now</a>
+
+<table class="table table-responsive">
+    <tr>
+        <th>Bank Name</th>
+        <td>@Model?.ResponseBody?.BankName</td>
+        <td>@Model?.ResponseBody?.BankCode</td>
+    </tr>
+    <tr>
+        <th>Account Name</th>
+        <td>@Model?.ResponseBody?.AccountName</td>
+    </tr>
+    <tr>
+        <th>Account Number</th>
+        <td>@Model?.ResponseBody?.AccountNumber</td>
+    </tr>
+    <tr>
+        <th>Customer Name</th>
+        <td>@Model?.ResponseBody?.CustomerName</td>
+    </tr>
+    <tr>
+        <th>Customer Email</th>
+        <td>@Model?.ResponseBody?.CustomerEmail</td>
+    </tr>
+    <tr>
+        <th>Amount</th>
+        <td>@Model?.ResponseBody?.Amount</td>
+    </tr>
+
+    <tr>
+        <th>Payment Status</th>
+        <td>@Model?.ResponseBody?.Description</td>
+    </tr>
+    <tr>
+        <th>Expiry Date</th>
+        <td>@Model?.ResponseBody?.ExpiryDate</td>
+    </tr>
+</table>
+
