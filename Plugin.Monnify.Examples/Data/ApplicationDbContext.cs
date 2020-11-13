@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-
-namespace Plugin.Monnify.Demo.Data
+namespace Plugin.Monnify.Examples.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

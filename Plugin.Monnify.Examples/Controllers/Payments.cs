@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 using Plugin.Monnify.Helpers;
 using Plugin.Monnify.InvoiceApi;
@@ -8,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Plugin.Monnify.Demo.Controllers
+namespace Plugin.Monnify.Examples.Controllers
 {
 
     public class Payments : Controller
@@ -64,18 +65,20 @@ namespace Plugin.Monnify.Demo.Controllers
 
         [HttpGet]
         public async Task<IActionResult> ConfirmPayment(string paymentReference)
-        {
+        {        
+            // Get the transaction details by payment reference
             var paymentDetail = await _monnifyClient.VerifyTransactionByPaymentReference(
                                         new TransactionStatusRequest { PaymentReference = paymentReference });
 
-            ////Verify Payment Status by calling back to Monnify
-            //var response = await _monnifyClient.VerifyTransactionByTransactionReference(new TransactionStatusRequest
-            //                                        { TransactionReference = paymentDetail.ResponseBody.TransactionReference });
+            //Verify Payment Status by calling back verifying the transaction by Transaction Number
+            var response = await _monnifyClient.VerifyTransactionByTransactionReference(paymentDetail.ResponseBody.TransactionReference);
 
-            if (paymentDetail.ResponseBody.PaymentStatus.Trim().ToLower() == "paid")
+            // Chek if payment is successful
+            if (response.ResponseBody.PaymentStatus.Trim().ToLower() == "paid")
             {
                 //persist and log successful response 
-                return View(paymentDetail);
+                // Also check for duplicate transaction to avoid been processed twice
+                return View(response);
             }
 
             return View(paymentDetail);

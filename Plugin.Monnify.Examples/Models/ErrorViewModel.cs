@@ -1,6 +1,6 @@
 using System;
 
-namespace Plugin.Monnify.Demo.Models
+namespace Plugin.Monnify.Examples.Models
 {
     public class ErrorViewModel
     {

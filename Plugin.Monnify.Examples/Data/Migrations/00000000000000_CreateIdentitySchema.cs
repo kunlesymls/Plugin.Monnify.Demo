@@ -1,9 +1,9 @@
-﻿using System;
-
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Plugin.Monnify.Demo.Data.Migrations
+using System;
+
+namespace Plugin.Monnify.Examples.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

@@ -1,15 +1,21 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
 
-using Plugin.Monnify.Demo.Data;
+using Plugin.Monnify.Examples.Data;
 
-namespace Plugin.Monnify.Demo
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Plugin.Monnify.Examples
 {
     public class Startup
     {
@@ -28,6 +34,8 @@ namespace Plugin.Monnify.Demo
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddControllersWithViews();
+            services.AddRazorPages();
 
 
             //services.AddScoped<IMonnifyClient>(x => new MonnifyClient(Configuration.GetValue<string>("MonnifyUrl:BaseUrl")));
@@ -44,10 +52,6 @@ namespace Plugin.Monnify.Demo
                     SecretKey = Configuration.GetValue<string>("MonnifyUrl:SecretKey"),
                     ContractCode = Configuration.GetValue<string>("MonnifyUrl:ContractCode")
                 }));
-
-
-            services.AddControllersWithViews();
-            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

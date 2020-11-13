@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+
+using Plugin.Monnify.Examples.Models;
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-
-using Plugin.Monnify.Demo.Models;
-
-namespace Plugin.Monnify.Demo.Controllers
+namespace Plugin.Monnify.Examples.Controllers
 {
     public class HomeController : Controller
     {

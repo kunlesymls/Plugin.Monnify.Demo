@@ -1,14 +1,10 @@
-{
+﻿{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
-    "iis": {
-      "applicationUrl": "http://localhost/Plugin.Monnify.Demo",
-      "sslPort": 0
-    },
     "iisExpress": {
-      "applicationUrl": "http://localhost:1428",
-      "sslPort": 44389
+      "applicationUrl": "http://localhost:2913",
+      "sslPort": 44321
     }
   },
   "profiles": {
@@ -20,14 +16,14 @@
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"
       }
     },
-    "Plugin.Monnify.Demo": {
+    "Plugin.Monnify.Examples": {
       "commandName": "Project",
       "launchBrowser": true,
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"
-      },
-      "applicationUrl": "https://localhost:5001;http://localhost:5000"
+      }
     }
   }
 }

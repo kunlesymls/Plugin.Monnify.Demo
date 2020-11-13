@@ -5,16 +5,14 @@ using Plugin.Monnify.ReserveAccountApi;
 
 using System.Threading.Tasks;
 
-namespace Plugin.Monnify.Demo.Controllers
+namespace Plugin.Monnify.Examples.Controllers
 {
     public class ReserveAccount : Controller
     {
         public IMonnifyClient _monnifyClient;
-        IConfiguration _configuration;
-        public ReserveAccount(IMonnifyClient monnifyClient, IConfiguration configuration)
+        public ReserveAccount(IMonnifyClient monnifyClient)
         {
             _monnifyClient = monnifyClient;
-            _configuration = configuration;
         }
 
         public IActionResult Index()
@@ -24,14 +22,12 @@ namespace Plugin.Monnify.Demo.Controllers
 
         public async Task<IActionResult> CreateReserveAccount()
         {
-            var monnifyConfig = _configuration.GetSection("MonnifyUrl");
-            var authResponse = await _monnifyClient.GetBearerAccessToken(monnifyConfig["ApiKey"], monnifyConfig["SecretKey"]);
             var response = await _monnifyClient.ReserveAccount(new CreateReserveAccountRequest
             {
                 AccountName = "Joseph Ajileye",
                 CustomerName = "Joseph Ajileye",
-                CustomerEmail = "Kunlesymls@gmail.com",
-                AccountReference = $"MNFREF001",
+                CustomerEmail = "johndoe@gmail.com", // this is a unique field
+                AccountReference = $"MNFREF002", // this is a unique field
                 ContractCode = _monnifyClient.ContractCode,
             });
             if (response.RequestSuccessful)
