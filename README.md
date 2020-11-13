@@ -9,6 +9,8 @@ Install-Package Plugin.Monnify
 
 ```
 
+Clone or fork this project to see all the examples, this project is built with .net core 3.1
+
 # Usage
 Store your keys in the appsetting.json file like this
 ```
@@ -59,22 +61,36 @@ Store your keys in the appsetting.json file like this
                 RedirectUrl = Url.Action("ConfirmPayment", "Payments"),
                 IncomeSplitConfig = new List<Incomesplitconfig>()
             });
-            // Retun or persit the response
-            return View(oneTimePaymentApiResponse);
+            // Retun or persit the response            
  ```
  The Webhook notification 
  ```
-        public async Task<IActionResult> ConfirmPayment(string paymentReference)
-        {
+        // Get the transaction details by payment reference
+        var paymentDetail = await _monnifyClient.VerifyTransactionByPaymentReference(
+                                        new TransactionStatusRequest { PaymentReference = paymentReference });
 
-            //Verify Payment Status by calling back to Monnify
-            var response = await _monnifyClient.VerifyTransactionByPaymentReference(new TransactionStatusRequest { PaymentReference = paymentReference });
-            if (response.ResponseBody.PaymentStatus.Trim().ToLower() == "paid")
-            {
-                //persist and log successful response 
-                return View(response);
-            }
-            return View(response);
-        }
+        //Verify Payment Status by calling back verifying the transaction by Transaction Number
+        var response = await _monnifyClient.VerifyTransactionByTransactionReference(paymentDetail.ResponseBody.TransactionReference);
+ ```
+ # Create/Generate Invoice
+ 
+ To consume the One Time API, inject the IMonnifyClient that is registered in the startup.cs file
+ You can use the following snippet
+ 
+ ```
+  var invoiceResponse = await _monnifyClient.CreateInvoice(new InvoiceRequest
+    {
+        Amount = 500,
+        ContractCode = _monnifyClient.ContractCode,
+        CurrencyCode = "NGN",
+        ExpiryDate = DateTime.Now.AddDays(2).ToString("yyyy-MM-dd HH:mm:ss"),
+        CustomerEmail = "kunlesymls@gmail.com",
+        CustomerName = "Joseph Ajileye",
+        Description = $"Wallet Top-up for Joseph Ajileye",
+        InvoiceReference = Guid.NewGuid().ToString(),
+        RedirectUrl = $"https://{Request.Host.Value}{Url.Action("ConfirmPayment", "Payments")}",
+        //AccountReference = customer.CustomerWallet.MonnifyAccountReference
+    });
  ```
  
+ Use thesame webhook notification as describe above.
